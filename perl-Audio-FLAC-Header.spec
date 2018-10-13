@@ -4,14 +4,14 @@
 #
 Name     : perl-Audio-FLAC-Header
 Version  : 2.4
-Release  : 2
+Release  : 3
 URL      : https://cpan.metacpan.org/authors/id/D/DA/DANIEL/Audio-FLAC-Header-2.4.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DA/DANIEL/Audio-FLAC-Header-2.4.tar.gz
 Summary  : interface to FLAC header metadata.
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
-Requires: perl-Audio-FLAC-Header-man
-BuildRequires : perl(inc::Module::Install)
+BuildRequires : buildreq-cpan
+BuildRequires : perl(Module::Install)
 
 %description
 Audio::FLAC version 2.4
@@ -20,12 +20,13 @@ how to install the module, any machine dependencies it may have (for
 example C compilers and installed libraries) and any other information
 that should be provided before the module is installed.
 
-%package man
-Summary: man components for the perl-Audio-FLAC-Header package.
-Group: Default
+%package dev
+Summary: dev components for the perl-Audio-FLAC-Header package.
+Group: Development
+Provides: perl-Audio-FLAC-Header-devel = %{version}-%{release}
 
-%description man
-man components for the perl-Audio-FLAC-Header package.
+%description dev
+dev components for the perl-Audio-FLAC-Header package.
 
 
 %prep
@@ -54,9 +55,9 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -65,8 +66,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/Audio/FLAC/Header.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Audio/FLAC/Header.pm
 
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Audio::FLAC::Header.3
