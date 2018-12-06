@@ -4,7 +4,7 @@
 #
 Name     : perl-Audio-FLAC-Header
 Version  : 2.4
-Release  : 7
+Release  : 8
 URL      : https://cpan.metacpan.org/authors/id/D/DA/DANIEL/Audio-FLAC-Header-2.4.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DA/DANIEL/Audio-FLAC-Header-2.4.tar.gz
 Summary  : interface to FLAC header metadata.
