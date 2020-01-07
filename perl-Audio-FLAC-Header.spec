@@ -4,12 +4,13 @@
 #
 Name     : perl-Audio-FLAC-Header
 Version  : 2.4
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/D/DA/DANIEL/Audio-FLAC-Header-2.4.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DA/DANIEL/Audio-FLAC-Header-2.4.tar.gz
 Summary  : interface to FLAC header metadata.
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
+Requires: perl-Audio-FLAC-Header-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(Module::Install)
 
@@ -24,19 +25,30 @@ that should be provided before the module is installed.
 Summary: dev components for the perl-Audio-FLAC-Header package.
 Group: Development
 Provides: perl-Audio-FLAC-Header-devel = %{version}-%{release}
+Requires: perl-Audio-FLAC-Header = %{version}-%{release}
 
 %description dev
 dev components for the perl-Audio-FLAC-Header package.
 
 
+%package perl
+Summary: perl components for the perl-Audio-FLAC-Header package.
+Group: Default
+Requires: perl-Audio-FLAC-Header = %{version}-%{release}
+
+%description perl
+perl components for the perl-Audio-FLAC-Header package.
+
+
 %prep
 %setup -q -n Audio-FLAC-Header-2.4
+cd %{_builddir}/Audio-FLAC-Header-2.4
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -46,7 +58,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -66,8 +78,11 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Audio/FLAC/Header.pm
 
 %files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Audio::FLAC::Header.3
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Audio/FLAC/Header.pm
