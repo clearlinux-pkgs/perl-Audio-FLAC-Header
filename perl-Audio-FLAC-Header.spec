@@ -4,7 +4,7 @@
 #
 Name     : perl-Audio-FLAC-Header
 Version  : 2.4
-Release  : 21
+Release  : 22
 URL      : https://cpan.metacpan.org/authors/id/D/DA/DANIEL/Audio-FLAC-Header-2.4.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DA/DANIEL/Audio-FLAC-Header-2.4.tar.gz
 Summary  : interface to FLAC header metadata.
@@ -85,4 +85,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.34.0/Audio/FLAC/Header.pm
+/usr/lib/perl5/*
